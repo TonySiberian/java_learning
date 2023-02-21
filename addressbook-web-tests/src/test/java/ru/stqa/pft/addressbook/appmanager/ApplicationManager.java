@@ -1,17 +1,17 @@
 package ru.stqa.pft.addressbook.appmanager;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.NoAlertPresentException;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.GroupData;
 
 import java.util.concurrent.TimeUnit;
 
+import static org.testng.Assert.assertTrue;
+
 public class ApplicationManager {
     private WebDriver wd;
+    private boolean acceptNextAlert;
 
     public void init() {
         wd = new ChromeDriver();
@@ -118,4 +118,34 @@ public class ApplicationManager {
     public void initContactCreation() {
         wd.findElement(By.linkText("add new")).click();
     }
+
+    public void deleteSelectedContact() {
+        wd.findElement(By.xpath("//input[@value='Delete']")).click();
+        acceptNextAlert = true;
+        assertTrue(closeAlertAndGetItsText().matches("^Delete 1 addresses[\\s\\S]$"));
+    }
+
+    public void selectContact() {
+        wd.findElement(By.name("selected[]")).click();
+    }
+
+    public void gotoHomePage() {
+        wd.findElement(By.linkText("home")).click();
+    }
+
+    public String closeAlertAndGetItsText() {
+        try {
+            Alert alert = wd.switchTo().alert();
+            String alertText = alert.getText();
+            if (acceptNextAlert) {
+                alert.accept();
+            } else {
+                alert.dismiss();
+            }
+            return alertText;
+        } finally {
+            acceptNextAlert = true;
+        }
+    }
+
 }
