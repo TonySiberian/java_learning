@@ -52,6 +52,7 @@ public class ContactHelper {
         acceptNextAlert = true;
         assertTrue(closeAlertAndGetItsText().matches("^Delete 1 addresses[\\s\\S]$"));
     }
+
     public String closeAlertAndGetItsText() {
         try {
             Alert alert = wd.switchTo().alert();
@@ -66,6 +67,4 @@ public class ContactHelper {
             acceptNextAlert = true;
         }
     }
-
-
 }
