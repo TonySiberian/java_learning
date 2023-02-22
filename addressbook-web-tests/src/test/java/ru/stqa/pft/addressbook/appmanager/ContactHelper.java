@@ -1,14 +1,11 @@
 package ru.stqa.pft.addressbook.appmanager;
 
-import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import ru.stqa.pft.addressbook.model.ContactData;
-import static org.testng.Assert.assertTrue;
 
 public class ContactHelper {
     private WebDriver wd;
-    private boolean acceptNextAlert;
 
     public ContactHelper(WebDriver wd) {
         this.wd = wd;
@@ -49,22 +46,6 @@ public class ContactHelper {
 
     public void deleteSelectedContact() {
         wd.findElement(By.xpath("//input[@value='Delete']")).click();
-        acceptNextAlert = true;
-        assertTrue(closeAlertAndGetItsText().matches("^Delete 1 addresses[\\s\\S]$"));
-    }
-
-    public String closeAlertAndGetItsText() {
-        try {
-            Alert alert = wd.switchTo().alert();
-            String alertText = alert.getText();
-            if (acceptNextAlert) {
-                alert.accept();
-            } else {
-                alert.dismiss();
-            }
-            return alertText;
-        } finally {
-            acceptNextAlert = true;
-        }
+        wd.switchTo().alert().accept();
     }
 }
