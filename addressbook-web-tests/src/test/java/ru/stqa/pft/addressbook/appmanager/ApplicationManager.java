@@ -28,7 +28,7 @@ public class ApplicationManager {
         } else if (Browser.EDGE.browserName().equals(browser)) {
             wd = new EdgeDriver();
         }
-        wd.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
+        wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
         wd.get("http://localhost/addressbook/");
         groupHelper = new GroupHelper(wd);
         navigationHelper = new NavigationHelper(wd);
@@ -41,17 +41,6 @@ public class ApplicationManager {
         sessionHelper.logout();
         wd.quit();
     }
-
-    private boolean isElementPresent(By by) {
-        try {
-            wd.findElement(by);
-            return true;
-        } catch (NoSuchElementException e) {
-            return false;
-        }
-    }
-
-
 
     public GroupHelper getGroupHelper() {
         return groupHelper;
