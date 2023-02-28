@@ -54,4 +54,8 @@ public class GroupHelper extends HelperBase {
     public boolean isThereAGroup() {
         return isElementPresent(By.name("selected[]"));
     }
+
+    public String gettingGroupName() {
+        return (wd.findElement(By.xpath("//span[@class='group']"))).getText();
+    }
 }
