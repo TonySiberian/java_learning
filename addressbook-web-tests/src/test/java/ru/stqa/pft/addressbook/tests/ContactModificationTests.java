@@ -2,6 +2,7 @@ package ru.stqa.pft.addressbook.tests;
 
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.ContactData;
+import ru.stqa.pft.addressbook.model.GroupData;
 
 public class ContactModificationTests extends TestBase {
 
@@ -9,7 +10,11 @@ public class ContactModificationTests extends TestBase {
     public void testContactModification() {
         app.getNavigationHelper().gotoHomePage();
         if (! app.getContactHelper().isThereAContact()) {
-            app.getContactHelper().createContact(new ContactData("test_first_name", "test_last_name", "test_address", "11111111111", "test_e-mail@gmail.com", "test1"));
+            app.getNavigationHelper().gotoGroupPage();
+            if (! app.getGroupHelper().isThereAGroup()) {
+                app.getGroupHelper().createGroup(new GroupData("test1", null, null));
+            }
+            app.getContactHelper().createContact(new ContactData("test_first_name", "test_last_name", "test_address", "11111111111", "test_e-mail@gmail.com", app.getGroupHelper().gettingGroupName()));
         }
         app.getContactHelper().selectContact();
         app.getContactHelper().initContactModification();
