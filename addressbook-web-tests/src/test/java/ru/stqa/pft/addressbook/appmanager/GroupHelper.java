@@ -58,4 +58,8 @@ public class GroupHelper extends HelperBase {
     public String gettingGroupName() {
         return (wd.findElement(By.xpath("//span[@class='group']"))).getText();
     }
+
+    public int getGroupCount() {
+        return wd.findElements(By.name("selected[]")).size();
+    }
 }
