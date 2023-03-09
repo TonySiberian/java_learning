@@ -18,7 +18,7 @@ public class ContactDeletionTests extends TestBase {
             app.getContactHelper().createContact(new ContactData("test_first_name", "test_last_name", "test_address", "11111111111", "test_e-mail@gmail.com", app.getGroupHelper().gettingGroupName()));
         }
         int before = app.getContactHelper().getContactCount();
-        app.getContactHelper().selectContact();
+        app.getContactHelper().selectContact(before - 1);
         app.getContactHelper().deleteSelectedContact();
         int after = app.getContactHelper().getContactCount();
         Assert.assertEquals(after, before - 1);

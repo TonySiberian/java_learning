@@ -18,7 +18,7 @@ public class ContactModificationTests extends TestBase {
             app.getContactHelper().createContact(new ContactData("test_first_name", "test_last_name", "test_address", "11111111111", "test_e-mail@gmail.com", app.getGroupHelper().gettingGroupName()));
         }
         int before = app.getContactHelper().getContactCount();
-        app.getContactHelper().selectContact();
+        app.getContactHelper().selectContact(before - 1);
         app.getContactHelper().initContactModification();
         app.getContactHelper().fillContactForm(new ContactData("mod_first_name", "mod_last_name", "mod_address", "22222222222", "mod_test_e-mail@gmail.com", null), false);
         app.getContactHelper().submitContactModification();
