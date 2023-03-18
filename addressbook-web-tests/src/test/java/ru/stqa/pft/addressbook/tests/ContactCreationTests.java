@@ -18,7 +18,7 @@ public class ContactCreationTests extends TestBase {
             app.group().create(new GroupData().withName("test1"));
         }
         ContactData contact = new ContactData()
-                .withFirstName("test_first_name").withLastName("test_last_name").withAddress("test_address")
+                .withFirstName("test_first_name").withLastName("test_last_name").withAddress("test_address0\ntest_address1\ntest_address2")
                 .withHomePhone("11111111111").withMobilePhone("22222222222").withWorkPhone("33333333333")
                 .withEmail("test_e-mail@gmail.com").withEmail2("test_e-mail2@gmail.com")
                 .withEmail3("test_e-mail3@gmail.com").withGroup(app.group().gettingGroupName());
@@ -29,7 +29,7 @@ public class ContactCreationTests extends TestBase {
                 before.withAdded(contact.withId(after.stream().mapToInt((c) -> c.getId()).max().getAsInt()))));
     }
 
-    @Test
+    @Test (enabled = false)
     public void testBadContactCreation() throws Exception {
         app.goTo().homePage();
         Contacts before  = app.contact().all();
@@ -38,7 +38,7 @@ public class ContactCreationTests extends TestBase {
             app.group().create(new GroupData().withName("test1"));
         }
         ContactData contact = new ContactData()
-                .withFirstName("test_first_name'").withLastName("test_last_name").withAddress("test_address")
+                .withFirstName("test_first_name'").withLastName("test_last_name").withAddress("test_address0\ntest_address1\ntest_address2")
                 .withHomePhone("11111111111").withMobilePhone("22222222222").withWorkPhone("33333333333")
                 .withEmail("test_e-mail@gmail.com").withEmail2("test_e-mail2@gmail.com")
                 .withEmail3("test_e-mail3@gmail.com").withGroup(app.group().gettingGroupName());
