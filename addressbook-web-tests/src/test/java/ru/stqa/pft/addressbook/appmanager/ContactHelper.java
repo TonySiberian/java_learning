@@ -74,7 +74,6 @@ public class ContactHelper extends HelperBase{
     }
 
     public void initContactModification(int id) {
-//        wd.findElement(By.xpath("//a[contains(@href, 'edit.php?id=" + id + "')]")).click();
         wd.findElement(By.cssSelector(String.format("a[href='edit.php?id=%s']", id))).click();
     }
 
@@ -125,15 +124,13 @@ public class ContactHelper extends HelperBase{
         for (WebElement element : elements) {
             List<WebElement> cells = element.findElements(By.tagName("td"));
             int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
-//            String lastName = element.findElement(By.xpath(".//td[2]")).getText();
-//            String firstName = element.findElement(By.xpath(".//td[3]")).getText();
             String lastName = cells.get(1).getText();
             String firstName = cells.get(2).getText();
-            String allAddresses = cells.get(3).getText();
+            String address = cells.get(3).getText();
             String allEmails = cells.get(4).getText();
             String allPhones = cells.get(5).getText();
             contactCache.add(new ContactData().withId(id).withLastName(lastName).withFirstName(firstName)
-                    .withAllAddresses(allAddresses).withAllEmails(allEmails).withAllPhones(allPhones));
+                    .withAddress(address).withAllEmails(allEmails).withAllPhones(allPhones));
         }
         return new Contacts(contactCache);
     }
