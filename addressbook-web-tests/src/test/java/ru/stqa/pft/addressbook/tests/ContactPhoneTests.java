@@ -37,9 +37,9 @@ public class ContactPhoneTests extends TestBase {
     }
 
     private String mergePhones(ContactData contact) {
-        return Arrays.asList(contact.getHomePhone(), contact.getMobilePhone(), contact.getWorkPhone()).stream()
-                .filter((s) -> ! s.equals("")).map(ContactPhoneTests::cleaned)
-                .collect(Collectors.joining("\n"));
+        return Arrays.asList(contact.getHomePhone(), contact.getMobilePhone(), contact.getWorkPhone(), contact.getHomePhone2())
+                .stream().filter((s) -> ! s.equals(""))
+                .map(ContactPhoneTests::cleaned).collect(Collectors.joining("\n"));
     }
 
     public static String cleaned(String phone) {
