@@ -5,25 +5,68 @@ import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.Contacts;
 import ru.stqa.pft.addressbook.model.GroupData;
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 public class ContactCreationTests extends TestBase {
 
-    @Test
-    public void testContactCreation() throws Exception {
+    @DataProvider
+    public Iterator<Object[]> validContacts() {
+        File photo = new File("src/test/resources/cat.jpg");
+        app.goTo().groupPage();
+        List<Object[]> list = new ArrayList<Object[]>();
+        list.add(new Object[] {new ContactData()
+                .withFirstName("test_first_name1").withLastName("test_last_name1").withAddress("1test_address0\n1test_address1\n1test_address2")
+                .withHomePhone("11111111111").withMobilePhone("12222222222").withWorkPhone("13333333333")
+                .withHomePhone2("14444444444").withEmail("1test_e-mail@gmail.com").withEmail2("1test_e-mail2@gmail.com")
+                .withEmail3("1test_e-mail3@gmail.com").withPhoto(photo).withGroup(app.group().gettingGroupName())});
+        list.add(new Object[] {new ContactData()
+                .withFirstName("test_first_name2").withLastName("test_last_name2").withAddress("2test_address0\n2test_address1\n2test_address2")
+                .withHomePhone("21111111111").withMobilePhone("22222222222").withWorkPhone("23333333333")
+                .withHomePhone2("24444444444").withEmail("2test_e-mail@gmail.com").withEmail2("2test_e-mail2@gmail.com")
+                .withEmail3("2test_e-mail3@gmail.com").withPhoto(photo).withGroup(app.group().gettingGroupName())});
+        list.add(new Object[] {new ContactData()
+                .withFirstName("test_first_name3").withLastName("test_last_name3").withAddress("3test_address0\n3test_address1\n3test_address2")
+                .withHomePhone("31111111111").withMobilePhone("32222222222").withWorkPhone("33333333333")
+                .withHomePhone2("34444444444").withEmail("3test_e-mail@gmail.com").withEmail2("3test_e-mail2@gmail.com")
+                .withEmail3("3test_e-mail3@gmail.com").withPhoto(photo).withGroup(app.group().gettingGroupName())});
+        return list.iterator();
+    }
+
+    @DataProvider
+    public Iterator<Object[]> invalidContacts() {
+        File photo = new File("src/test/resources/cat.jpg");
+        app.goTo().groupPage();
+        List<Object[]> list = new ArrayList<Object[]>();
+        list.add(new Object[] {new ContactData()
+                .withFirstName("test_first_name1'").withLastName("test_last_name1").withAddress("1test_address0\n1test_address1\n1test_address2")
+                .withHomePhone("11111111111").withMobilePhone("12222222222").withWorkPhone("13333333333")
+                .withHomePhone2("14444444444").withEmail("1test_e-mail@gmail.com").withEmail2("1test_e-mail2@gmail.com")
+                .withEmail3("1test_e-mail3@gmail.com").withPhoto(photo).withGroup(app.group().gettingGroupName())});
+        list.add(new Object[] {new ContactData()
+                .withFirstName("test_first_name2'").withLastName("test_last_name2").withAddress("2test_address0\n2test_address1\n2test_address2")
+                .withHomePhone("21111111111").withMobilePhone("22222222222").withWorkPhone("23333333333")
+                .withHomePhone2("24444444444").withEmail("2test_e-mail@gmail.com").withEmail2("2test_e-mail2@gmail.com")
+                .withEmail3("2test_e-mail3@gmail.com").withPhoto(photo).withGroup(app.group().gettingGroupName())});
+        list.add(new Object[] {new ContactData()
+                .withFirstName("test_first_name3'").withLastName("test_last_name3").withAddress("3test_address0\n3test_address1\n3test_address2")
+                .withHomePhone("31111111111").withMobilePhone("32222222222").withWorkPhone("33333333333")
+                .withHomePhone2("34444444444").withEmail("3test_e-mail@gmail.com").withEmail2("3test_e-mail2@gmail.com")
+                .withEmail3("3test_e-mail3@gmail.com").withPhoto(photo).withGroup(app.group().gettingGroupName())});
+        return list.iterator();
+    }
+
+    @Test(dataProvider = "validContacts")
+    public void testContactCreation(ContactData contact) throws Exception {
         app.goTo().homePage();
         Contacts before  = app.contact().all();
         app.goTo().groupPage();
         if (app.group().all().size() == 0) {
             app.group().create(new GroupData().withName("test1"));
         }
-        File photo = new File("src/test/resources/cat.jpg");
-        ContactData contact = new ContactData()
-                .withFirstName("test_first_name").withLastName("test_last_name").withAddress("test_address0\ntest_address1\ntest_address2")
-                .withHomePhone("11111111111").withMobilePhone("22222222222").withWorkPhone("33333333333")
-                .withHomePhone2("44444444444").withEmail("test_e-mail@gmail.com").withEmail2("test_e-mail2@gmail.com")
-                .withEmail3("test_e-mail3@gmail.com").withPhoto(photo).withGroup(app.group().gettingGroupName());
         app.contact().create(contact);
         assertThat(app.contact().count(), equalTo(before.size() + 1));
         Contacts after  = app.contact().all();
@@ -31,20 +74,14 @@ public class ContactCreationTests extends TestBase {
                 before.withAdded(contact.withId(after.stream().mapToInt((c) -> c.getId()).max().getAsInt()))));
     }
 
-    @Test (enabled = false)
-    public void testBadContactCreation() throws Exception {
+    @Test(dataProvider = "invalidContacts")
+    public void testBadContactCreation(ContactData contact) throws Exception {
         app.goTo().homePage();
         Contacts before  = app.contact().all();
         app.goTo().groupPage();
         if (app.group().all().size() == 0) {
             app.group().create(new GroupData().withName("test1"));
         }
-        File photo = new File("src/test/resources/cat.jpg");
-        ContactData contact = new ContactData()
-                .withFirstName("test_first_name'").withLastName("test_last_name").withAddress("test_address0\ntest_address1\ntest_address2")
-                .withHomePhone("11111111111").withMobilePhone("22222222222").withWorkPhone("33333333333")
-                .withHomePhone2("44444444444").withEmail("test_e-mail@gmail.com").withEmail2("test_e-mail2@gmail.com")
-                .withEmail3("test_e-mail3@gmail.com").withPhoto(photo).withGroup(app.group().gettingGroupName());
         app.contact().create(contact);
         assertThat(app.contact().count(), equalTo(before.size()));
         Contacts after  = app.contact().all();
