@@ -36,25 +36,21 @@ public class ContactCreationTests extends TestBase {
     }
 
     @DataProvider
-    public Iterator<Object[]> invalidContacts() {
+    public Iterator<Object[]> invalidContacts() throws IOException {
         File photo = new File("src/test/resources/cat.jpg");
         app.goTo().groupPage();
         List<Object[]> list = new ArrayList<Object[]>();
-        list.add(new Object[] {new ContactData()
-                .withFirstName("test_first_name1'").withLastName("test_last_name1").withAddress("1test_address0\n1test_address1\n1test_address2")
-                .withHomePhone("11111111111").withMobilePhone("12222222222").withWorkPhone("13333333333")
-                .withHomePhone2("14444444444").withEmail("1test_e-mail@gmail.com").withEmail2("1test_e-mail2@gmail.com")
-                .withEmail3("1test_e-mail3@gmail.com").withPhoto(photo).withGroup(app.group().gettingGroupName())});
-        list.add(new Object[] {new ContactData()
-                .withFirstName("test_first_name2'").withLastName("test_last_name2").withAddress("2test_address0\n2test_address1\n2test_address2")
-                .withHomePhone("21111111111").withMobilePhone("22222222222").withWorkPhone("23333333333")
-                .withHomePhone2("24444444444").withEmail("2test_e-mail@gmail.com").withEmail2("2test_e-mail2@gmail.com")
-                .withEmail3("2test_e-mail3@gmail.com").withPhoto(photo).withGroup(app.group().gettingGroupName())});
-        list.add(new Object[] {new ContactData()
-                .withFirstName("test_first_name3'").withLastName("test_last_name3").withAddress("3test_address0\n3test_address1\n3test_address2")
-                .withHomePhone("31111111111").withMobilePhone("32222222222").withWorkPhone("33333333333")
-                .withHomePhone2("34444444444").withEmail("3test_e-mail@gmail.com").withEmail2("3test_e-mail2@gmail.com")
-                .withEmail3("3test_e-mail3@gmail.com").withPhoto(photo).withGroup(app.group().gettingGroupName())});
+        BufferedReader reader = new BufferedReader(new FileReader("src/test/resources/contacts.csv"));
+        String line = reader.readLine();
+        while (line != null) {
+            String[] split = line.split(";");
+            list.add(new Object[]{new ContactData()
+                    .withFirstName(split[0] + "'").withLastName(split[1]).withAddress(split[2])
+                    .withHomePhone(split[3]).withMobilePhone(split[4]).withWorkPhone(split[5])
+                    .withHomePhone2(split[6]).withEmail(split[7]).withEmail2(split[8])
+                    .withEmail3(split[9]).withPhoto(photo).withGroup(app.group().gettingGroupName())});
+            line = reader.readLine();
+        }
         return list.iterator();
     }
 

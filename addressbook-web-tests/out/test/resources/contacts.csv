@@ -1,5 +1,3 @@
-firstname 0; lastname 0; address 0; 03830000; 03831111; 03832222; 03833333; 0test_e-mail@gmail.com; 0test_e-mail2@gmail.com; 0test_e-mail3@gmail.com
-firstname 1; lastname 1; address 1; 13830000; 13831111; 13832222; 13833333; 1test_e-mail@gmail.com; 1test_e-mail2@gmail.com; 1test_e-mail3@gmail.com
-firstname 2; lastname 2; address 2; 23830000; 23831111; 23832222; 23833333; 2test_e-mail@gmail.com; 2test_e-mail2@gmail.com; 2test_e-mail3@gmail.com
-firstname 3; lastname 3; address 3; 33830000; 33831111; 33832222; 33833333; 3test_e-mail@gmail.com; 3test_e-mail2@gmail.com; 3test_e-mail3@gmail.com
-firstname 4; lastname 4; address 4; 43830000; 43831111; 43832222; 43833333; 4test_e-mail@gmail.com; 4test_e-mail2@gmail.com; 4test_e-mail3@gmail.com
+firstname 0;lastname 0;address 0;00000;01111;02222;03333;0test_e-mail@gmail.com;0test_e-mail2@gmail.com;0test_e-mail3@gmail.com
+firstname 1;lastname 1;address 1;10000;11111;12222;13333;1test_e-mail@gmail.com;1test_e-mail2@gmail.com;1test_e-mail3@gmail.com
+firstname 2;lastname 2;address 2;20000;21111;22222;23333;2test_e-mail@gmail.com;2test_e-mail2@gmail.com;2test_e-mail3@gmail.com
