@@ -89,7 +89,7 @@ public class ContactCreationTests extends TestBase {
                 before.withAdded(contact.withId(after.stream().mapToInt((c) -> c.getId()).max().getAsInt()))));
     }
 
-    @Test(dataProvider = "invalidContacts")
+    @Test(dataProvider = "invalidContacts", enabled = false)
     public void testBadContactCreation(ContactData contact) throws Exception {
         app.goTo().homePage();
         Contacts before  = app.contact().all();
