@@ -22,32 +22,34 @@ public class ContactCreationTests extends TestBase {
 
     @DataProvider
     public Iterator<Object[]> validContactsFromXml() throws IOException {
-        BufferedReader reader = new BufferedReader(new FileReader("src/test/resources/contacts.xml"));
-        String xml = "";
-        String line = reader.readLine();
-        while (line != null) {
-            xml += line;
-            line = reader.readLine();
+        try (BufferedReader reader = new BufferedReader(new FileReader("src/test/resources/contacts.xml"))) {
+            String xml = "";
+            String line = reader.readLine();
+            while (line != null) {
+                xml += line;
+                line = reader.readLine();
+            }
+            XStream xstream = new XStream();
+            xstream.processAnnotations(ContactData.class);
+            xstream.allowTypes(new Class[]{ContactData.class});
+            List<ContactData> contacts = (List<ContactData>) xstream.fromXML(xml);
+            return contacts.stream().map((g) -> new Object[] {g}).collect(Collectors.toList()).iterator();
         }
-        XStream xstream = new XStream();
-        xstream.processAnnotations(ContactData.class);
-        xstream.allowTypes(new Class[]{ContactData.class});
-        List<ContactData> contacts = (List<ContactData>) xstream.fromXML(xml);
-        return contacts.stream().map((g) -> new Object[] {g}).collect(Collectors.toList()).iterator();
     }
 
     @DataProvider
     public Iterator<Object[]> validContactsFromJson() throws IOException {
-        BufferedReader reader = new BufferedReader(new FileReader("src/test/resources/contacts.json"));
-        String json = "";
-        String line = reader.readLine();
-        while (line != null) {
-            json += line;
-            line = reader.readLine();
+        try (BufferedReader reader = new BufferedReader(new FileReader("src/test/resources/contacts.json"))) {
+            String json = "";
+            String line = reader.readLine();
+            while (line != null) {
+                json += line;
+                line = reader.readLine();
+            }
+            Gson gson = new Gson();
+            List<ContactData> contacts = gson.fromJson(json, new TypeToken<List<ContactData>>(){}.getType());
+            return contacts.stream().map((g) -> new Object[] {g}).collect(Collectors.toList()).iterator();
         }
-        Gson gson = new Gson();
-        List<ContactData> contacts = gson.fromJson(json, new TypeToken<List<ContactData>>(){}.getType());
-        return contacts.stream().map((g) -> new Object[] {g}).collect(Collectors.toList()).iterator();
     }
 
     @DataProvider
@@ -55,18 +57,19 @@ public class ContactCreationTests extends TestBase {
         File photo = new File("src/test/resources/cat.jpg");
         app.goTo().groupPage();
         List<Object[]> list = new ArrayList<Object[]>();
-        BufferedReader reader = new BufferedReader(new FileReader("src/test/resources/contacts.csv"));
-        String line = reader.readLine();
-        while (line != null) {
-            String[] split = line.split(";");
-            list.add(new Object[]{new ContactData()
-                    .withFirstName(split[0] + "'").withLastName(split[1]).withAddress(split[2])
-                    .withHomePhone(split[3]).withMobilePhone(split[4]).withWorkPhone(split[5])
-                    .withHomePhone2(split[6]).withEmail(split[7]).withEmail2(split[8])
-                    .withEmail3(split[9]).withPhoto(photo).withGroup(app.group().gettingGroupName())});
-            line = reader.readLine();
+        try (BufferedReader reader = new BufferedReader(new FileReader("src/test/resources/contacts.csv"))) {
+            String line = reader.readLine();
+            while (line != null) {
+                String[] split = line.split(";");
+                list.add(new Object[]{new ContactData()
+                        .withFirstName(split[0] + "'").withLastName(split[1]).withAddress(split[2])
+                        .withHomePhone(split[3]).withMobilePhone(split[4]).withWorkPhone(split[5])
+                        .withHomePhone2(split[6]).withEmail(split[7]).withEmail2(split[8])
+                        .withEmail3(split[9]).withPhoto(photo).withGroup(app.group().gettingGroupName())});
+                line = reader.readLine();
+            }
+            return list.iterator();
         }
-        return list.iterator();
     }
 
     @Test(dataProvider = "validContactsFromJson")
