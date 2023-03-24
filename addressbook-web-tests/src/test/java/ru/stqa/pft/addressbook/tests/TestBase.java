@@ -8,7 +8,8 @@ import ru.stqa.pft.addressbook.appmanager.ApplicationManager;
 
 public class TestBase {
 
-    public static final ApplicationManager app = new ApplicationManager(Browser.EDGE.browserName());
+    public static final ApplicationManager app
+            = new ApplicationManager(System.getProperty("browser", Browser.EDGE.browserName()));
 
     @BeforeSuite(alwaysRun = true)
     public void setUp() throws Exception {
