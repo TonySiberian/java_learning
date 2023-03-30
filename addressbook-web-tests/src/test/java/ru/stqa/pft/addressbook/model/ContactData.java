@@ -3,37 +3,75 @@ package ru.stqa.pft.addressbook.model;
 import com.google.gson.annotations.Expose;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
+import jakarta.persistence.*;
+import org.hibernate.annotations.Type;
 import java.io.File;
 import java.util.Objects;
 
 @XStreamAlias("contact")
+@Entity
+@Table(name = "addressbook")
 public class ContactData {
     @XStreamOmitField
+    @Id
+    @Column(name = "id")
     private int id = Integer.MAX_VALUE;
+
     @Expose
+    @Column(name = "firstName")
     private String firstName;
+
     @Expose
+    @Column(name = "lastName")
     private String lastName;
+
     @Expose
+    @Column(name = "")
     private String address;
+
     @Expose
+    @Column(name = "home")
     private String homePhone;
+
     @Expose
+    @Column(name = "mobile")
     private String mobilePhone;
+
     @Expose
+    @Column(name = "work")
     private String workPhone;
+
     @Expose
+    @Column(name = "phone2")
     private String homePhone2;
-    private String allPhones;
+
     @Expose
+    @Column(name = "email")
     private String email;
+
     @Expose
+    @Column(name = "email2")
     private String email2;
+
     @Expose
+    @Column(name = "email3")
     private String email3;
-    private String allEmails;
+
+//    @Expose
+//    @Column(name = "deprecated")
+//    @Type(type = "datetime")
+//    private String deprecated;
+
+    @Transient
     private String group;
-    private File photo;
+
+    @Column(name = "photo")
+    private String photo;
+
+    @Transient
+    private String allPhones;
+    @Transient
+    private String allEmails;
 
 
     // GETTERS:
@@ -94,7 +132,7 @@ public class ContactData {
     }
 
     public File getPhoto() {
-        return photo;
+        return new File(photo);
     }
 
 
@@ -170,7 +208,7 @@ public class ContactData {
     }
 
     public ContactData withPhoto(File photo) {
-        this.photo = photo;
+        this.photo = photo.getPath();
         return this;
     }
 
