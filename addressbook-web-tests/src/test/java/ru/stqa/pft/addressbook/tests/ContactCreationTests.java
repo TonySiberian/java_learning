@@ -74,17 +74,17 @@ public class ContactCreationTests extends TestBase {
 
     @Test(dataProvider = "validContactsFromJson")
     public void testContactCreation(ContactData contact) throws Exception {
-        app.goTo().homePage();
-        Contacts before  = app.contact().all();
-        app.goTo().groupPage();
-        if (app.group().all().size() == 0) {
+        if (app.db().groups().size() == 0) {
+            app.goTo().groupPage();
             app.group().create(new GroupData().withName("test1"));
         }
-        String group = new String(app.group().gettingGroupName());
+        String group = app.db().groups().iterator().next().getName();
         File photo = new File("src/test/resources/cat.jpg");
+        app.goTo().homePage();
+        Contacts before  = app.db().contacts();
         app.contact().create(contact.withPhoto(photo).withGroup(group));
         assertThat(app.contact().count(), equalTo(before.size() + 1));
-        Contacts after  = app.contact().all();
+        Contacts after  = app.db().contacts();
         assertThat(after, equalTo(
                 before.withAdded(contact.withId(after.stream().mapToInt((c) -> c.getId()).max().getAsInt()))));
     }
