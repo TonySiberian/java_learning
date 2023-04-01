@@ -57,10 +57,9 @@ public class ContactData {
     @Column(name = "email3")
     private String email3;
 
-//    @Expose
-//    @Column(name = "deprecated")
-//    @Type(type = "datetime")
-//    private String deprecated;
+    @Expose
+    @Column(name = "deprecated", columnDefinition = "Datetime")
+    private String deprecated;
 
     @Transient
     private String group;
@@ -134,6 +133,10 @@ public class ContactData {
 
     public File getPhoto() {
         return new File(photo);
+    }
+
+    public String getDeprecated() {
+        return deprecated;
     }
 
 
@@ -210,6 +213,11 @@ public class ContactData {
 
     public ContactData withPhoto(File photo) {
         this.photo = photo.getPath();
+        return this;
+    }
+
+    public ContactData withDeprecated(String deprecated) {
+        this.deprecated = deprecated;
         return this;
     }
 
