@@ -7,6 +7,7 @@ import org.testng.annotations.*;
 import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.Contacts;
 import ru.stqa.pft.addressbook.model.GroupData;
+import ru.stqa.pft.addressbook.model.Groups;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -55,6 +56,7 @@ public class ContactCreationTests extends TestBase {
     @DataProvider
     public Iterator<Object[]> invalidContacts() throws IOException {
         File photo = new File("src/test/resources/cat.jpg");
+        Groups group  = app.db().groups();
         app.goTo().groupPage();
         List<Object[]> list = new ArrayList<Object[]>();
         try (BufferedReader reader = new BufferedReader(new FileReader("src/test/resources/contacts.csv"))) {
@@ -65,7 +67,7 @@ public class ContactCreationTests extends TestBase {
                         .withFirstName(split[0] + "'").withLastName(split[1]).withAddress(split[2])
                         .withHomePhone(split[3]).withMobilePhone(split[4]).withWorkPhone(split[5])
                         .withHomePhone2(split[6]).withEmail(split[7]).withEmail2(split[8])
-                        .withEmail3(split[9]).withPhoto(photo).withGroup(app.group().gettingGroupName())});
+                        .withEmail3(split[9]).withPhoto(photo).inGroup(group.iterator().next())});
                 line = reader.readLine();
             }
             return list.iterator();
@@ -78,11 +80,11 @@ public class ContactCreationTests extends TestBase {
             app.goTo().groupPage();
             app.group().create(new GroupData().withName("test1"));
         }
-        String group = app.db().groups().iterator().next().getName();
+        Groups group  = app.db().groups();
         File photo = new File("src/test/resources/cat.jpg");
         app.goTo().homePage();
         Contacts before  = app.db().contacts();
-        app.contact().create(contact.withPhoto(photo).withGroup(group));
+        app.contact().create(contact.withPhoto(photo).inGroup(group.iterator().next()));
         assertThat(app.contact().count(), equalTo(before.size() + 1));
         Contacts after  = app.db().contacts();
         assertThat(after, equalTo(

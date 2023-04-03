@@ -4,6 +4,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.GroupData;
+import ru.stqa.pft.addressbook.model.Groups;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -13,6 +14,7 @@ public class ContactDataTests extends TestBase {
 
     @BeforeMethod
     public void ensurePreconditions() {
+        Groups group  = app.db().groups();
         app.goTo().homePage();
         if (app.contact().all().size() == 0) {
             app.goTo().groupPage();
@@ -23,7 +25,7 @@ public class ContactDataTests extends TestBase {
                     .withFirstName("test_first_name").withLastName("test_last_name").withAddress("test_address0\ntest_address1\ntest_address2")
                     .withHomePhone("11111111111").withMobilePhone("22222222222").withWorkPhone("33333333333")
                     .withHomePhone2("44444444444").withEmail("test_e-mail@gmail.com").withEmail2("test_e-mail2@gmail.com")
-                    .withEmail3("test_e-mail3@gmail.com").withGroup(app.group().gettingGroupName()));
+                    .withEmail3("test_e-mail3@gmail.com").inGroup(group.iterator().next()));
         }
     }
 
