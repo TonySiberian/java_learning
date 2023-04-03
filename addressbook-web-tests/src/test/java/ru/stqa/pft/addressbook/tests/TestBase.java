@@ -4,6 +4,7 @@ package ru.stqa.pft.addressbook.tests;
 import org.openqa.selenium.remote.Browser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeMethod;
@@ -14,7 +15,9 @@ import ru.stqa.pft.addressbook.model.Contacts;
 import ru.stqa.pft.addressbook.model.GroupData;
 import ru.stqa.pft.addressbook.model.Groups;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -58,6 +61,17 @@ public class TestBase {
         }
     }
 
+//        public void verifyContactListInUI() {
+//        if (Boolean.getBoolean("verifyUI")) {
+//            List<ContactData> dbContacts  = new ArrayList(app.db().contacts());
+//            List<ContactData> uiContacts  = new ArrayList(app.contact().all());
+//            Comparator<? super ContactData> byId = (c1, c2) -> Integer.compare(c1.getId(), c2.getId());
+//            dbContacts.sort(byId);
+//            uiContacts.sort(byId);
+//            Assert.assertEquals(dbContacts, uiContacts);
+//        }
+//    }
+
 //    public void verifyContactListInUI() {
 //        if (Boolean.getBoolean("verifyUI")) {
 //            Contacts dbContacts  = app.db().contacts();
@@ -69,18 +83,18 @@ public class TestBase {
 //        }
 //    }
 
-    private String mergePhones(ContactData contact) {
-        return Arrays.asList(contact.getHomePhone(), contact.getMobilePhone(), contact.getWorkPhone(), contact.getHomePhone2())
-                .stream().filter((s) -> ! s.equals(""))
-                .map(ContactDataTests::cleaned).collect(Collectors.joining("\n"));
-    }
-
-    private String mergeEmails(ContactData contact) {
-        return Arrays.asList(contact.getEmail(), contact.getEmail2(), contact.getEmail3())
-                .stream().filter((s) -> ! s.equals("")).collect(Collectors.joining("\n"));
-    }
-
-    public static String cleaned(String phone) {
-        return phone.replaceAll("\\s", "").replaceAll("[-()]", "");
-    }
+//    private String mergePhones(ContactData contact) {
+//        return Arrays.asList(contact.getHomePhone(), contact.getMobilePhone(), contact.getWorkPhone(), contact.getHomePhone2())
+//                .stream().filter((s) -> ! s.equals(""))
+//                .map(ContactDataTests::cleaned).collect(Collectors.joining("\n"));
+//    }
+//
+//    private String mergeEmails(ContactData contact) {
+//        return Arrays.asList(contact.getEmail(), contact.getEmail2(), contact.getEmail3())
+//                .stream().filter((s) -> ! s.equals("")).collect(Collectors.joining("\n"));
+//    }
+//
+//    public static String cleaned(String phone) {
+//        return phone.replaceAll("\\s", "").replaceAll("[-()]", "");
+//    }
 }
