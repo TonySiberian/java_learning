@@ -87,6 +87,7 @@ public class ContactCreationTests extends TestBase {
         Contacts after  = app.db().contacts();
         assertThat(after, equalTo(
                 before.withAdded(contact.withId(after.stream().mapToInt((c) -> c.getId()).max().getAsInt()))));
+        verifyContactListInUI();
     }
 
     @Test(dataProvider = "invalidContacts", enabled = false)
