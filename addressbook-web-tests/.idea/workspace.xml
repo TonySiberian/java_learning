@@ -27,7 +27,17 @@
         <task path="$PROJECT_DIR$/../mantis_tests">
           <activation />
         </task>
-        <projects_view />
+        <projects_view>
+          <tree_state>
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="mantis_tests" type="f1a62948:ProjectNode" />
+              </path>
+            </expand>
+            <select />
+          </tree_state>
+        </projects_view>
       </state>
     </system>
   </component>
@@ -150,6 +160,11 @@
           <url>file://$PROJECT_DIR$/../mantis_tests/src/test/java/ru/stqa/pft/mantis/appmanager/HttpSession.java</url>
           <line>36</line>
           <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/../mantis_tests/src/test/java/ru/stqa/pft/mantis/tests/RegistrationTests.java</url>
+          <line>25</line>
+          <option name="timeStamp" value="3" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
