@@ -154,20 +154,6 @@
     <servers />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/../mantis_tests/src/test/java/ru/stqa/pft/mantis/appmanager/HttpSession.java</url>
-          <line>36</line>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/../mantis_tests/src/test/java/ru/stqa/pft/mantis/tests/RegistrationTests.java</url>
-          <line>25</line>
-          <option name="timeStamp" value="3" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
     <watches-manager>
       <configuration name="TestNG">
         <watch expression="((ConnectionHolder)((HttpResponseProxy)response).connHolder).log" custom="org.apache.http.impl.execchain.HttpResponseProxy,org.apache.http.impl.execchain.ConnectionHolder" />
