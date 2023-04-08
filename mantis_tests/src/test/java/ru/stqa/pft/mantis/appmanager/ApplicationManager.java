@@ -20,6 +20,8 @@ public class ApplicationManager {
     private FtpHelper ftp;
     private MailHelper mailHelper;
     private JamesHelper jamesHelper;
+    private LoginHelper loginHelper;
+    private UsersHelper usersHelper;
 
     public ApplicationManager(String browser) {
         this.browser = browser;
@@ -50,6 +52,20 @@ public class ApplicationManager {
             registrationHelper = new RegistrationHelper(this);
         }
         return registrationHelper;
+    }
+
+    public LoginHelper login() {
+        if (loginHelper == null) {
+            loginHelper = new LoginHelper(this);
+        }
+        return loginHelper;
+    }
+
+    public UsersHelper users() {
+        if (usersHelper == null) {
+            usersHelper = new UsersHelper(this);
+        }
+        return usersHelper;
     }
 
     public FtpHelper ftp() {
