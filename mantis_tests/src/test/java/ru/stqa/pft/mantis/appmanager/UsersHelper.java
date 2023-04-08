@@ -1,7 +1,6 @@
 package ru.stqa.pft.mantis.appmanager;
 
 import org.openqa.selenium.By;
-import org.testng.Assert;
 
 public class UsersHelper extends HelperBase {
 

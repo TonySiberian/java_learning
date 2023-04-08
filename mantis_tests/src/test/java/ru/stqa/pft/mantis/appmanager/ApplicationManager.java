@@ -22,6 +22,7 @@ public class ApplicationManager {
     private JamesHelper jamesHelper;
     private LoginHelper loginHelper;
     private UsersHelper usersHelper;
+    private DbHelper dbHelper;
 
     public ApplicationManager(String browser) {
         this.browser = browser;
@@ -87,6 +88,13 @@ public class ApplicationManager {
             jamesHelper = new JamesHelper(this);
         }
         return jamesHelper;
+    }
+
+    public DbHelper db() {
+        if (dbHelper == null) {
+            dbHelper = new DbHelper(this);
+        }
+        return dbHelper;
     }
 
     public WebDriver getDriver() {

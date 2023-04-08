@@ -78,11 +78,28 @@
       <recent name="C:\Users\Fynjy\Documents\GitHub\java_learning\mantis_tests\src\test\resources" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="ru.stqa.pft.mantis.appmanager" />
       <recent name="ru.stqa.pft.mantis.tests" />
+      <recent name="ru.stqa.pft.mantis.appmanager" />
     </key>
   </component>
   <component name="RunManager" selected="TestNG.PasswordResetTests">
+    <configuration name="DbConnectionTests" type="TestNG" temporary="true" nameIsGenerated="true">
+      <module name="mantis_tests.test" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="ru.stqa.pft.mantis.tests.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="ru.stqa.pft.mantis.tests" />
+      <option name="MAIN_CLASS_NAME" value="ru.stqa.pft.mantis.tests.DbConnectionTests" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="GroupCreationTests" type="TestNG" temporary="true" nameIsGenerated="true">
       <module name="addressbook-web-tests.test" />
       <extension name="coverage">
@@ -100,7 +117,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="LoginTests" type="TestNG" temporary="true" nameIsGenerated="true">
+    <configuration name="HbConnectionTest" type="TestNG" temporary="true" nameIsGenerated="true">
       <module name="mantis_tests.test" />
       <extension name="coverage">
         <pattern>
@@ -109,7 +126,7 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="ru.stqa.pft.mantis.tests" />
-      <option name="MAIN_CLASS_NAME" value="ru.stqa.pft.mantis.tests.LoginTests" />
+      <option name="MAIN_CLASS_NAME" value="ru.stqa.pft.mantis.tests.HbConnectionTest" />
       <option name="TEST_OBJECT" value="CLASS" />
       <properties />
       <listeners />
@@ -154,9 +171,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="TestNG.PasswordResetTests" />
+        <item itemvalue="TestNG.HbConnectionTest" />
+        <item itemvalue="TestNG.DbConnectionTests" />
         <item itemvalue="TestNG.RegistrationTests" />
         <item itemvalue="TestNG.GroupCreationTests" />
-        <item itemvalue="TestNG.LoginTests" />
       </list>
     </recent_temporary>
   </component>
