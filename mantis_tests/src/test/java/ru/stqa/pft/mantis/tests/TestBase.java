@@ -9,7 +9,7 @@ import java.io.File;
 public class TestBase {
 
     public static final ApplicationManager app
-            = new ApplicationManager(System.getProperty("browser", Browser.EDGE.browserName()));
+            = new ApplicationManager(System.getProperty("browser", Browser.FIREFOX.browserName()));
 
     @BeforeSuite(alwaysRun = true)
     public void setUp() throws Exception {
