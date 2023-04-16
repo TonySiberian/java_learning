@@ -23,6 +23,7 @@ public class Issue {
     }
 
 
+
     // SETTERS
     public Issue withId(int id) {
         this.id = id;
