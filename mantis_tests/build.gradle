@@ -19,6 +19,10 @@ dependencies {
 }
 
 test {
+    useTestNG()
+}
+
+test {
     useTestNG {
         suites 'src/test/resources/testng-groups.xml'
     }

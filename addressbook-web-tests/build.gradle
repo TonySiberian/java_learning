@@ -16,6 +16,10 @@ dependencies {
     implementation group: 'org.hibernate.orm', name: 'hibernate-core', version: '6.2.0.CR4'
 }
 
+test {
+    useTestNG()
+}
+
 task testGroups(type: Test) {
     useTestNG {
         suites 'src/test/resources/testng-groups.xml'
