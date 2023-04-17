@@ -16,7 +16,6 @@ gradle-app.setting
 *.log
 *.gradle
 *.gradle
-mantis_tests/build.gradle
 addressbook-web-tests/.idea/workspace.xml
 addressbook-web-tests/.idea/workspace.xml
 addressbook-web-tests/.idea/workspace.xml
