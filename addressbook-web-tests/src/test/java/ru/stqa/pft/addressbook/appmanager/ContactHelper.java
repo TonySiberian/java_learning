@@ -138,6 +138,20 @@ public class ContactHelper extends HelperBase{
         click(By.name("add"));
     }
 
+    public void removeContactFromGroup(ContactData modContact, GroupData delGroup) {
+        goToGroupContentPage(delGroup);
+        selectContactById(modContact.getId());
+        removeSelectedContactFromGroup();
+    }
+
+    private void goToGroupContentPage(GroupData delGroup) {
+        new Select(wd.findElement(By.name("group"))).selectByValue(String.valueOf(delGroup.getId()));
+    }
+
+    public void removeSelectedContactFromGroup() {
+        click(By.name("remove"));
+    }
+
 
 
     public int count() {
@@ -166,4 +180,6 @@ public class ContactHelper extends HelperBase{
         }
         return new Contacts(contactCache);
     }
+
+
 }
