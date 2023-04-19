@@ -7,6 +7,9 @@ import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.Contacts;
+import ru.stqa.pft.addressbook.model.GroupData;
+import ru.stqa.pft.addressbook.model.Groups;
+
 import java.util.List;
 
 public class ContactHelper extends HelperBase{
@@ -113,6 +116,29 @@ public class ContactHelper extends HelperBase{
     public boolean isThereAContact() {
         return isElementPresent(By.name("selected[]"));
     }
+
+
+    // ContactAddingToGroupTests
+    public GroupData findAnotherGroupForAdding(Groups groupsBefore, Groups allGroups) {
+        for (GroupData g : allGroups) {
+            if (!groupsBefore.contains(g)) {
+                return g;
+            }
+        }
+        return null;
+    }
+
+    public void addContactToGroup(ContactData modContact, GroupData group) {
+        selectContactById(modContact.getId());
+        new Select(wd.findElement(By.name("to_group"))).selectByValue(String.valueOf(group.getId()));
+        submitContactAddingToGroup();
+    }
+
+    public void submitContactAddingToGroup() {
+        click(By.name("add"));
+    }
+
+
 
     public int count() {
         return wd.findElements(By.name("selected[]")).size();
